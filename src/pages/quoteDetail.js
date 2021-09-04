@@ -13,3 +13,4 @@ const QuoteDetail = (props) => {
 }
 
 export default QuoteDetail
+

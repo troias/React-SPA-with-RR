@@ -6,9 +6,10 @@ import {
 } from "react-router-dom";
 import Layout from './components/layout/Layout'
 import MainNavigation from "./components/layout/MainNavigation";
-import Quotes from './components/quotes/quotes'
-import AddQuote from './components/quotes/AddQuote'
-import  QuoteDetail  from "./components/quotes/QuoteDetail";
+
+import AllQuotes from './pages/AllQuotes'
+import NewQuote from './pages/NewQuote'
+import QuoteDetail  from "./pages/QuoteDetail";
 
 
 const defaultState = []
@@ -49,13 +50,13 @@ function App() {
             <Redirect to="/welcome" />
           </Route>
           <Route exact path="/quotes" >
-            <Quotes quotes={state} />
+            <AllQuotes quotes={state} />
           </Route>
           <Route path="/quotes/:quoteID" >
             <QuoteDetail quoteDetail={state} />
           </Route>
           <Route path="/add-quote">
-            <AddQuote addQuote={addQuoteHandler} />
+            <NewQuote addQuote={addQuoteHandler} />
           </Route>
           <Route path="/">
 

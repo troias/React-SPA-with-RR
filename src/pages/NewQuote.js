@@ -1,7 +1,7 @@
 import React from 'react'
-import QuoteForm from './QuoteForm'
+import QuoteForm from '../components/quotes/QuoteForm'
 
- const AddQuote = (props) => {
+ const NewQuote = (props) => {
     return (
         <div>
            <QuoteForm onAddQuote={props.addQuote}/>
@@ -9,4 +9,4 @@ import QuoteForm from './QuoteForm'
     )
 }
 
-export default AddQuote
+export default NewQuote
