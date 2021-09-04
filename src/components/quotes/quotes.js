@@ -1,16 +1,17 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import QuotesList from '../quotes/QuoteList'
 
-const quotes = [{
-    id: 1, 
-    author: "troias", 
-    test: "test"
-  }]
 
- const Quotes = () => {
+
+
+const Quotes = (props) => {
+console.log("QuoteList", props.quotes)
     return (
+      
         <div>
-     <QuotesList quotes={quotes}/>
+             {/* quotes={props.quotes} */}
+          <QuotesList quotes={props.quotes} /> 
         </div>
     )
 }

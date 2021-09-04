@@ -15,8 +15,8 @@ const QuoteForm = (props) => {
     const enteredText = textInputRef.current.value;
 
     // optional: Could validate here
-
-    props.onAddQuote({ author: enteredAuthor, text: enteredText });
+    const item = { id: Math.random().toFixed(2) * 100 , author: enteredAuthor, text: enteredText }
+    props.onAddQuote(item);
   }
 
   return (

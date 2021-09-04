@@ -1,10 +1,10 @@
 import React from 'react'
 import QuoteForm from './QuoteForm'
 
- const AddQuote = () => {
+ const AddQuote = (props) => {
     return (
         <div>
-           <QuoteForm/>
+           <QuoteForm onAddQuote={props.addQuote}/>
         </div>
     )
 }
