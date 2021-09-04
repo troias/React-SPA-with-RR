@@ -1,10 +1,8 @@
 import React from 'react'
 
-const Logo = () => {
+const Logo = (props) => {
     return (
-        <div>
-            
-        </div>
+       <h1 className={props.className}>Great Quotes</h1>
     )
 }
 
