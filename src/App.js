@@ -46,8 +46,8 @@ function App() {
 
       <Layout>
         <Switch>
-          <Route exact path="/welcome">
-            <Redirect to="/welcome" />
+          <Route exact path="/">
+            <Redirect to="/quotes" />
           </Route>
           <Route exact path="/quotes" >
             <AllQuotes quotes={state} />

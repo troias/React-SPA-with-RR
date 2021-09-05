@@ -1,7 +1,7 @@
 import classes from './MainNavigation.module.css'
 import Logo from '../UI/Logo'
 import React from 'react'
-import {Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 
 const MainNavigation = () => {
     return (
@@ -9,15 +9,15 @@ const MainNavigation = () => {
 
 
         <header className={classes.header}>
-            <Link to='/'>
+            <NavLink  to='/'>
            
             <Logo className={classes.logo} />
-            </Link>
+            </NavLink >
             <nav className={classes.nav}>
                 <ul >
 
-                    <li><Link to="/quotes"> All Quotes </Link></li>
-                    <li><Link to="/add-quote"> Add a Quote </Link></li>
+                    <li><NavLink to="/quotes"> All Quotes </NavLink></li>
+                    <li><NavLink to="/add-quote"> Add a Quote </NavLink></li>
                 </ul>
             </nav>
         </header>
