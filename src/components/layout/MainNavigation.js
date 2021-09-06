@@ -16,8 +16,8 @@ const MainNavigation = () => {
             <nav className={classes.nav}>
                 <ul >
 
-                    <li><NavLink to="/quotes"> All Quotes </NavLink></li>
-                    <li><NavLink to="/add-quote"> Add a Quote </NavLink></li>
+                    <li><NavLink activeClassName={classes.active} to="/quotes"> All Quotes </NavLink></li>
+                    <li><NavLink activeClassName={classes.active} to="/add-quote"> Add a Quote </NavLink></li>
                 </ul>
             </nav>
         </header>

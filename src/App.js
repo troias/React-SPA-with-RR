@@ -1,44 +1,76 @@
-import {useReducer} from 'react'
+import { useReducer } from 'react'
 import {
   Switch,
   Route,
   Redirect,
+  useHistory
 } from "react-router-dom";
 import Layout from './components/layout/Layout'
 import MainNavigation from "./components/layout/MainNavigation";
 
 import AllQuotes from './pages/AllQuotes'
 import NewQuote from './pages/NewQuote'
-import QuoteDetail  from "./pages/QuoteDetail";
-
+import QuoteDetail from "./pages/QuoteDetail";
+import NotFound from './pages/NotFound';
 
 const defaultState = []
 
 const defaultReducer = (state, action) => {
   switch (action.type) {
     case "ADD-QUOTE":
-   
-   
-    return [{
-      ...action.payload
-    }]
+
+
+      return [
+        ...state,
+        {
+
+          ...action.payload
+        }]
+
+    case "ADD-COMMENT":
 
       
+      return [
+        ...state,
+        {
+        ...action.payload
+      }]
+
   
+
+
     default: return state
   }
 }
 
+
 function App() {
+
   const [state, dispatch] = useReducer(defaultReducer, defaultState)
-  console.log("state", state)
+  console.log("currState", state )
+  const histroy = useHistory()
+  console.log("histroy", histroy)
+
+
+
+
   const addQuoteHandler = (item) => {
-    console.log("item", item)
+
     dispatch({
       type: "ADD-QUOTE",
       payload: item
     })
+    histroy.replace("/quotes")
   }
+
+  const addCommentHandler = (item) => {
+    dispatch({
+      type: "ADD-COMMENT",
+      payload: item
+    })
+    console.log("FocusItem", item )
+  }
+
 
   return (
     <>
@@ -46,6 +78,7 @@ function App() {
 
       <Layout>
         <Switch>
+
           <Route exact path="/">
             <Redirect to="/quotes" />
           </Route>
@@ -53,13 +86,14 @@ function App() {
             <AllQuotes quotes={state} />
           </Route>
           <Route path="/quotes/:quoteID" >
-            <QuoteDetail quoteDetail={state} />
+            <QuoteDetail addComment={addCommentHandler} quoteDetail={state} />
           </Route>
           <Route path="/add-quote">
-            <NewQuote addQuote={addQuoteHandler} />
+            <NewQuote  addQuote={addQuoteHandler} />
           </Route>
-          <Route path="/">
 
+          <Route path='*'>
+            <NotFound />
           </Route>
         </Switch>
       </Layout>

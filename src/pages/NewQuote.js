@@ -4,7 +4,7 @@ import QuoteForm from '../components/quotes/QuoteForm'
  const NewQuote = (props) => {
     return (
         <div>
-           <QuoteForm onAddQuote={props.addQuote}/>
+           <QuoteForm isFocused={props.isFocused} onAddQuote={props.addQuote}/>
         </div>
     )
 }
