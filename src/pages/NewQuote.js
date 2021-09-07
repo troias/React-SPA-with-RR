@@ -21,7 +21,6 @@ import {addQuote} from '../lib/api'
     return (
         <div>
            <QuoteForm isLoading={status === "pending"} 
-           isFocused={props.isFocused}
             onAddQuote={addQuoteHandler}/>
         </div>
     )

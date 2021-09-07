@@ -16,14 +16,12 @@ const QuoteForm = (props) => {
     const enteredText = textInputRef.current.value;
 
     // optional: Could validate here
-    const item = { id: Math.random().toFixed(2) * 100, author: enteredAuthor, text: enteredText }
-    props.onAddQuote(item);
+   
+    props.onAddQuote({ author: enteredAuthor, text: enteredText });
   }
 
   const formFocusHandler = () => {
-    // console.log("focus")
     setIsEntered(true)
-    // props.isFocused(true)
   }
   const finishedEnteringHandler = () => {
     setIsEntered(false)

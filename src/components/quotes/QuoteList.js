@@ -29,8 +29,7 @@ const QuoteList = (props) => {
   }
 
   const sortedQuotes = sortQuotes(props.quotes, isSortingAscending)
-  // console.log("location", isSortingAscending)
-  // console.log("queryParams", queryParams)
+
   return (
 
     <Fragment>
