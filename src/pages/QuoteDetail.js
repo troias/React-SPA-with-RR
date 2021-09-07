@@ -10,7 +10,7 @@ const QuoteDetail = (props) => {
     const paramsId = +params.quoteID
     const quote = props.quoteDetail.find(x => x.id === paramsId)
 
-    console.log("match", match)
+    // console.log("quoteDetailPaths", match)
 
 
 
@@ -28,7 +28,7 @@ const QuoteDetail = (props) => {
             <Route path={`${match.path}`} exact>
                 <div className="centered">
 
-                    <Link to={`${match.path}/comments`} className="btn--flat" >
+                    <Link to={`${match.url}/comments`} className="btn--flat" >
                         Load Comments
                     </Link>
                 </div>

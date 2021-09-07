@@ -1,4 +1,4 @@
-import { useReducer } from 'react'
+import { useReducer, useEffect, useCallback } from 'react'
 import {
   Switch,
   Route,
@@ -7,11 +7,13 @@ import {
 } from "react-router-dom";
 import Layout from './components/layout/Layout'
 import MainNavigation from "./components/layout/MainNavigation";
-
+import useHttp from './hooks/use-http'
 import AllQuotes from './pages/AllQuotes'
 import NewQuote from './pages/NewQuote'
 import QuoteDetail from "./pages/QuoteDetail";
 import NotFound from './pages/NotFound';
+import { getAllComments, getAllQuotes } from './lib/api'
+
 
 const defaultState = []
 
@@ -29,14 +31,14 @@ const defaultReducer = (state, action) => {
 
     case "ADD-COMMENT":
 
-      
+
       return [
         ...state,
         {
-        ...action.payload
-      }]
+          ...action.payload
+        }]
 
-  
+
 
 
     default: return state
@@ -47,10 +49,24 @@ const defaultReducer = (state, action) => {
 function App() {
 
   const [state, dispatch] = useReducer(defaultReducer, defaultState)
-  console.log("currState", state )
+  const { sendRequest, status, data: loadedQuotes } = useHttp(getAllQuotes)
   const histroy = useHistory()
-  console.log("histroy", histroy)
 
+  //   console.log("sendRequest", test.sendRequest )
+
+  // console.log("useHttpState", test)
+
+  const pullAllQuotes =  useCallback(() => {
+    sendRequest()
+  }, [sendRequest])
+
+  useEffect(() => {
+    pullAllQuotes()
+    return () => {
+
+    };
+    // console.log("quoteObj", quoteObj)
+  }, [pullAllQuotes])
 
 
 
@@ -62,13 +78,12 @@ function App() {
     })
     histroy.replace("/quotes")
   }
-
+  console.log("loadedQuotes", loadedQuotes)
+  console.log("currState", state)
+  console.log("status", status)
   const addCommentHandler = (item) => {
-    dispatch({
-      type: "ADD-COMMENT",
-      payload: item
-    })
-    console.log("FocusItem", item )
+    // const req = test.sendRequest(item)
+    // console.log("FocusItem", req )
   }
 
 
@@ -83,13 +98,13 @@ function App() {
             <Redirect to="/quotes" />
           </Route>
           <Route exact path="/quotes" >
-            <AllQuotes quotes={state} />
+            <AllQuotes quotes={loadedQuotes} status={status} />
           </Route>
           <Route path="/quotes/:quoteID" >
-            <QuoteDetail addComment={addCommentHandler} quoteDetail={state} />
+            <QuoteDetail addComment={addCommentHandler} quoteDetail={loadedQuotes} />
           </Route>
           <Route path="/add-quote">
-            <NewQuote  addQuote={addQuoteHandler} />
+            <NewQuote addQuote={addQuoteHandler} />
           </Route>
 
           <Route path='*'>
