@@ -1,24 +1,41 @@
-import { useRef } from 'react';
-import  useHttp from '../../hooks/use-http'
+import { useRef, useEffect } from 'react';
+import useHttp from '../../hooks/use-http'
 import { addComment } from '../../lib/api'
+
 import classes from './NewCommentForm.module.css';
+import LoadingSpinner from '../UI/LoadingSpinner'
 
 const NewCommentForm = (props) => {
   const commentTextRef = useRef();
-  const {sendRequest} = useHttp(addComment)
+  const { sendRequest, status, error } = useHttp(addComment)
+  const { onAddedComment } = props
 
- 
+
+
+
+  useEffect(() => {
+    if (status === "completed" && !error) {
+      onAddedComment()
+    }
+  }, [status, error, onAddedComment])
+
   const submitFormHandler = (event) => {
     event.preventDefault();
-   
 
- 
-    console.log("formComment", commentTextRef)
+    const enteredText = commentTextRef.current.value
+    console.log("enteredText", enteredText)
+    sendRequest({
+      commentData: {text: enteredText },
+      quoteId: props.quoteId
+    })
+
+    console.log("formComment")
 
   };
 
   return (
     <form className={classes.form} onSubmit={submitFormHandler}>
+      {status === "pending" && <LoadingSpinner />}
       <div className={classes.control} onSubmit={submitFormHandler}>
         <label htmlFor='comment'>Your Comment</label>
         <textarea id='comment' rows='5' ref={commentTextRef}></textarea>

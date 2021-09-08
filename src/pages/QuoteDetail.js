@@ -34,7 +34,7 @@ const QuoteDetail = () => {
         <p>{error}</p>
 
     }
-    if (!loadedQuotes) {
+    if (!loadedQuotes.text) {
         return (
             <p>
                 No quote found
@@ -48,7 +48,7 @@ const QuoteDetail = () => {
         <div>
 
             <HighlightedQuote text={loadedQuotes.text} author={loadedQuotes.author} />
-        <p> {loadedQuotes.id} </p>
+   
             <Route path={`${match.path}`} exact>
                 <div className="centered">
 
