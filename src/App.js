@@ -1,27 +1,29 @@
-import React, { useEffect, useCallback, Suspense } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
-import Layout from "./components/layout/Layout";
-import MainNavigation from "./components/layout/MainNavigation";
-import useHttp from "./hooks/use-http";
-import { getAllQuotes } from "./lib/api";
-import LoadingSpinner from "./components/UI/LoadingSpinner";
+import React, { useEffect, useCallback, Suspense } from "react"
+import { Switch, Route, Redirect } from "react-router-dom"
+import Layout from "./components/layout/Layout"
+import MainNavigation from "./components/layout/MainNavigation"
+import useHttp from "./hooks/use-http"
+import { getAllQuotes } from "./lib/api"
+import LoadingSpinner from "./components/UI/LoadingSpinner"
 
-const NewQuote = React.lazy(() => import("./pages/NewQuote"));
-const QuoteDetail = React.lazy(() => import("./pages/QuoteDetail"));
-const NotFound = React.lazy(() => import("./pages/NotFound"));
-const AllQuotes = React.lazy(() => import("./pages/AllQuotes"));
+const NewQuote = React.lazy(() => import("./pages/NewQuote"))
+const QuoteDetail = React.lazy(() => import("./pages/QuoteDetail"))
+const NotFound = React.lazy(() => import("./pages/NotFound"))
+const AllQuotes = React.lazy(() => import("./pages/AllQuotes"))
 
 function App() {
-  const { sendRequest, status, data: loadedQuotes } = useHttp(getAllQuotes);
+  const { sendRequest, status, data: loadedQuotes } = useHttp(getAllQuotes)
+
+  console.log("loadedQuotes", process.env.REACT_APP_FIREBASE_DOMAIN)
 
   const pullAllQuotes = useCallback(() => {
-    sendRequest();
-  }, [sendRequest]);
+    sendRequest()
+  }, [sendRequest])
 
   useEffect(() => {
-    pullAllQuotes();
-    return () => {};
-  }, [pullAllQuotes]);
+    pullAllQuotes()
+    return () => {}
+  }, [pullAllQuotes])
 
   return (
     <>
@@ -54,7 +56,7 @@ function App() {
         </Suspense>
       </Layout>
     </>
-  );
+  )
 }
 
-export default App;
+export default App
